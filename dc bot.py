@@ -1,10 +1,13 @@
 from http import client
 import json
+from lib2to3.pgen2 import token
 from unittest import case
 from webbrowser import get
 import requests
 import discord
 client = discord.Client()
+with open('config.json') as f:  
+    token = json.load(f)["token"]
 
 def get_quote():
     response= requests.get("https://v1.hitokoto.cn/")
@@ -47,4 +50,4 @@ b2inspire - 發送心靈雞湯
 @client.event
 async def on_disconnect():
     await client.change_presence(status=discord.Status.offline)
-client.run('OTU2Nzg0NjQxNjc3ODczMTgy.Yj1RIg.kRcR5PHvvaaflfIhr3nXE8bbFtk')
+client.run(token)
