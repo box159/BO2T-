@@ -4,6 +4,7 @@ import json
 import requests
 import discord
 from discord.ext import commands
+import keep_alive
 
 client = commands.Bot(command_prefix='b!')
 
@@ -77,5 +78,10 @@ async def inspire(ctx):
 @client.event
 async def on_disconnect():
     await client.change_presence(status=discord.Status.offline)
-
+try:
+    alive = odata["keep_alive"]
+    if(alive):
+        keep_alive.keep_alive()
+except:
+    pass
 client.run(odata["token"])
