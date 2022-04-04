@@ -47,13 +47,20 @@ async def on_message(message):
     if message.author == client.user:
         return
     if message.content=="b!":
-        await message.channel.send("""           
---------------------
-b! - 開啟指令介面
-b!inspire - 發送心靈雞湯
-b!joke - 發送梗圖
---------------------
-""")
+        embed=discord.Embed(title="BO2T機器人指令表", description="--", color=0x00ff40)
+        embed.set_thumbnail(url="https://cdn.discordapp.com/attachments/959065572799307797/960428136363876362/fixed.png")
+        embed.add_field(name="b!", value="開啟指令介面", inline=False)
+        embed.add_field(name="b!inspire", value="發送心靈雞湯", inline=False)
+        embed.add_field(name="b!joke", value="發送梗圖", inline=False)
+        embed.set_footer(text="made By box159#6942")
+        await message.channel.send(embed=embed)
+#         await message.channel.send("""           
+# --------------------
+# b! - 開啟指令介面
+# b!inspire - 發送心靈雞湯
+# b!joke - 發送梗圖
+# --------------------
+# """)
     elif message.content == 'ping':
         await message.channel.send('pong')
     elif message.content.startswith("說"):
@@ -84,4 +91,5 @@ try:
         keep_alive.keep_alive()
 except:
     pass
+
 client.run(odata["token"])
