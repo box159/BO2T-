@@ -6,7 +6,7 @@ import discord
 from discord.ext import commands
 import keep_alive
 
-client = commands.Bot(command_prefix='b!')
+client = commands.Bot(command_prefix='b!',help_command=None)
 
 with open('config.json','r') as f:  
     odata = json.load(f)
@@ -38,7 +38,7 @@ def get_quote():
 @client.event
 async def on_ready():
     print("哈囉~我是",client.user)
-    game = discord.Game("made by box159 | b!")
+    game = discord.Activity(type=discord.ActivityType.watching,name= "BO2工具人 b!|m!")
     await client.change_presence(status=discord.Status.online,activity=game)
 
 @client.event
@@ -46,21 +46,6 @@ async def on_message(message):
     await client.process_commands(message)
     if message.author == client.user:
         return
-    if message.content=="b!":
-        embed=discord.Embed(title="BO2T機器人指令表", description="--", color=0x00ff40)
-        embed.set_thumbnail(url="https://cdn.discordapp.com/attachments/959065572799307797/960428136363876362/fixed.png")
-        embed.add_field(name="b!", value="開啟指令介面", inline=False)
-        embed.add_field(name="b!inspire", value="發送心靈雞湯", inline=False)
-        embed.add_field(name="b!joke", value="發送梗圖", inline=False)
-        embed.set_footer(text="made By box159#6942")
-        await message.channel.send(embed=embed)
-#         await message.channel.send("""           
-# --------------------
-# b! - 開啟指令介面
-# b!inspire - 發送心靈雞湯
-# b!joke - 發送梗圖
-# --------------------
-# """)
     elif message.content == 'ping':
         await message.channel.send('pong')
     elif message.content.startswith("說"):
@@ -81,6 +66,16 @@ async def joke(ctx):
 @client.command() 
 async def inspire(ctx):
     await ctx.send(get_quote())
+
+@client.command()
+async def help(ctx):
+    embed=discord.Embed(title="BO2T機器人指令表", description="--", color=0x00ff40)
+    embed.set_thumbnail(url="https://cdn.discordapp.com/attachments/959065572799307797/960428136363876362/fixed.png")
+    embed.add_field(name="b!", value="開啟指令介面", inline=False)
+    embed.add_field(name="b!inspire", value="發送心靈雞湯", inline=False)
+    embed.add_field(name="b!joke", value="發送梗圖", inline=False)
+    embed.set_footer(text="made By box159#6942")
+    await ctx.send(embed=embed)
 
 @client.event
 async def on_disconnect():
