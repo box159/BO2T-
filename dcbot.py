@@ -38,8 +38,8 @@ def get_quote():
 @client.event
 async def on_ready():
     print("哈囉~我是",client.user)
-    game = discord.Activity(type=discord.ActivityType.watching,name= "BO2工具人 b!|m!")
-    await client.change_presence(status=discord.Status.online,activity=game)
+    # game = discord.Activity(type=discord.ActivityType.watching,name= "BO2工具人 b!|m!")
+    # await client.change_presence(status=discord.Status.online,activity=game)
 
 @client.event
 async def on_message(message):
